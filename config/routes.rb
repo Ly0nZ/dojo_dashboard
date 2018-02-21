@@ -1,10 +1,34 @@
 Rails.application.routes.draw do
 
+  get 'dojos/:did/students/:sid' => "students#show"
+
+  get '/:did/students/new' => "students#new"
+
+  post '/:did/students/create' => "students#create"
+
+  get '/dojos/:did/students/:sid/edit' => "students#edit"
+
+  patch 'dojos/:did/students/:sid' => "students#update"
+
+  delete '/dojos/:did/students/:sid' => "students#destroy"
+
   get "dojos" => "dojos#index"
 
   get "dojos/new" => "dojos#new"
 
   post "dojos" => "dojos#create"
+
+  get '/dojos/:id' => "dojos#show"
+
+  get '/dojos/:id/edit' => "dojos#edit"
+
+  patch '/dojos/:id' => "dojos#update"
+
+  delete '/dojos/:id' => "dojos#destroy"
+
+  resources :dojo do
+    resources :students
+  end
 
   #get 'dojos' => 'dojos#index'
 

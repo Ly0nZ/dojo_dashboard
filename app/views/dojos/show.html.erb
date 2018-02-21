@@ -1,0 +1,32 @@
+<h1><%= @dojo.branch %> Dojo</h1>
+
+<h4>Address: <%= @dojo.street %></h4>
+<h4>City: <%= @dojo.city %>  State: <%= @dojo.state %> </h4>
+
+<h3>Student Roster</h3>
+<table>
+	<thead>
+		<tr>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Email</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @students.each do |s| %>
+			<tr>
+				<td><%= s.first_name %></td>
+				<td><%= s.last_name %></td>
+				<td><%= s.email %></td>
+				<td><a href="/dojos/<%= @dojo.id %>/students/<%= s.id %>">Show</a> | <a href="/dojos/<%= @dojo.id %>/students/<%= s.id %>/edit"> Edit</a> |
+					<form action="/dojos/<%= @dojo.id %>/students/<%= s.id %>" method="post">
+					<input type="hidden" name="_method" value="delete">
+					<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"><input type="submit" value="Delete" class="submit"></form></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table><br>
+<a href="/dojos">Home</a>|<a href="/dojos/<%= @dojo.id %>/edit">Edit</a><br>
+<br>
+<a href="/<%= @dojo.id %>/students/new">Add Student</a>
